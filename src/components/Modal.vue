@@ -14,7 +14,6 @@
             <footer class="modal-footer">
             <slot name="footer">
             </slot>
-            <button type="button" class="btn-green" @click="close"> Close </button>
             </footer>
         </div>
     </div>
@@ -61,7 +60,7 @@ export default {
   .modal-header {
     position: relative;
     border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
+    color: black;
     justify-content: space-between;
   }
 
@@ -85,7 +84,7 @@ export default {
     padding: 10px;
     cursor: pointer;
     font-weight: bold;
-    color: #4AAE9B;
+    color: black;
     background: transparent;
   }
 

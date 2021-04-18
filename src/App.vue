@@ -19,10 +19,15 @@ export default {
   methods: {
     setUser() {
       this.$store.dispatch("setUser");
-    }
+    },
+    setCategories() {
+      this.$store.dispatch("setCategories");
+    },
+
   },
   created(){
     this.setUser();
+    this.setCategories();
   }
 }
 </script>
@@ -30,11 +35,7 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
 }
 
 

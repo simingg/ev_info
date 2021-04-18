@@ -4,15 +4,15 @@
             <label for="Username"> Name: </label>
             <input type="text" id="username" v-model="form.name">
             <label for="Email"> Email: </label>
-            <input type="text" id="email" v-model="form.email">
+            <input type="email" id="email" v-model="form.email">
              <div class="form-group" :class="{ 'form-group--error': $v.form.password.$error }">
             <label for ="Password"> Password: </label>
-            <input type="text" id="password" v-model="form.password">
+            <input type="password" id="password" v-model="form.password">
             </div>
             <div class="error" v-if="!$v.form.password.minLength">Password must have at least {{$v.form.password.$params.minLength.min}} letters.</div>
             <div class="form-group" :class="{ 'form-group--error': $v.form.passwordConfirm.$error }">
             <label for ="Confirm Password"> Confirm Password: </label>
-            <input type="text" id="password2" v-model="form.passwordConfirm">
+            <input type="password" id="password2" v-model="form.passwordConfirm">
             </div>
             <div class="error" v-if="!$v.form.passwordConfirm.sameAsPassword">Passwords must be identical.</div>
             <label type="text" id="phoneNumber"> Phone Number: </label>
@@ -40,6 +40,7 @@ export default {
                 password: "",
                 passwordConfirm: "",
                 phoneNumber: "",
+                savedLocations: [],
             },
             submitStatus: "",
             error: null,
@@ -75,10 +76,12 @@ export default {
                 phoneNumber: this.form.phoneNumber,
                 password: this.form.password,
                 type: ['user'],
+                savedLocations: [],
             })
+            auth.signInWithEmailAndPassword(this.form.email, this.form.password);
             setTimeout(() => {
                 this.submitStatus = 'OK'
-                this.$router.replace({ name: 'Dashboard'})
+                this.$router.replace({ name: 'Home'})
                 }, 500)
             }
         },
@@ -87,40 +90,67 @@ export default {
 </script>
 
 <style scoped>
+
 input {
     display: block;
-    width: 50%;
-    font-size: 1.5rem;
+    width: 30%;
+    font-size: 1.2rem;
     line-height: 1;
     font-weight: 400;
     text-align: left;
-    padding: 10px 10px;
-    margin: 10px auto;
-    border: 1px solid #76C056;;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
     outline: none;
+    border-radius: 5px;
+
 }
+
 button {
-  display: block;
-  width: 30%;
-  font-size: 1.5rem;
-  line-height: 1;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: black;
-  background: #76C056;;
-  padding: 10px 10px;
-  margin: 30px auto;
-  border: 0;
-  outline: none;
-  cursor: pointer;
+    display: block;
+    width: 30%;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: white;
+    background-color: #008080;
+    padding: 10px 10px;
+    margin: 30px auto;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
+button:hover, button:active {
+  background-color: green;
+}
+
+label {
+    display: block;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;  
+}
+
 .error {        
     color: red;
     font-size: 1.2rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 .typo__p {
     font-size: 1.2rem;
-    color:green;
+    color: green;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 .invalid.untouched ~ .error {
     display: none;
